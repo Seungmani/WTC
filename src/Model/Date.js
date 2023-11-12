@@ -14,7 +14,7 @@ class Date {
 
 	#validateRange(date) {
 		if (1 > date || date > 31) {
-			throw new Error('[ERROR] 날짜는 1~31일 사잇값을 입력해 주세요');
+			throw new Error('[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.');
 		}
 	}
 

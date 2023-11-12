@@ -2,7 +2,8 @@ import Controller from "./Controller/controller";
 
 class App {
   async run() {
-    await Controller.play();
+    const controller = new Controller();
+    await controller.play();
   }
 }
 
