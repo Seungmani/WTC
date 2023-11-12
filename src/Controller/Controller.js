@@ -1,7 +1,7 @@
 import OutputView from "../View/OutputView";
 import InputView from "../View/InputView";
 
-class Controller{
+class Controller {
 
 	#date;
 	#menuList;
@@ -13,7 +13,8 @@ class Controller{
 
 	async play() {
 		OutputView.printWelcome();
-		this.#date = await InputView.readDate();
+		const date = await InputView.readDate();
+		this.#date = date;
 		this.#menuList = await InputView.readMenu();
 	}
 }
