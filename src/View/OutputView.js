@@ -8,7 +8,7 @@ const OutputView = {
 	},
   printMenu(menuList) {
     Console.print("<주문 메뉴>");
-    menuList.forEach((menu) => {
+    Object.entries(menuList).forEach((menu) => {
       Console.print(`${menu[0]} ${menu[1]}개`);
     });
   },
