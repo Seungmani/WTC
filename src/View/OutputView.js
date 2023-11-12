@@ -27,7 +27,7 @@ const OutputView = {
     }
 		Console.print('없음');
   },
-	printBenefitDetails({christmasDiscount, weekdayDiscount, weekendDiscount, giveawayDiscount}) {
+	printBenefitDetails(christmasDiscount, weekdayDiscount, weekendDiscount, giveawayDiscount) {
 		Console.print("<혜택 내역>");
 		if (christmasDiscount !== 0) Console.price(`크리스마스 디데이 할인: ${christmasDiscount}원`);
 		if (weekdayDiscount !== 0) Console.price(`평일 할인: ${weekdayDiscount}원`);
