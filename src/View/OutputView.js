@@ -3,6 +3,9 @@ import { MissionUtils } from "@woowacourse/mission-utils";
 const { Console } = MissionUtils;
 
 const OutputView = {
+	printWelcome(){
+		Console.print("안녕하세요! 우테코 식당 12월 이벤트 플래너입니다.");
+	},
   printMenu(menuList) {
     Console.print("<주문 메뉴>");
     menuList.array.forEach((menu) => {
