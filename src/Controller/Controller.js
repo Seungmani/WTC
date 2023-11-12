@@ -37,12 +37,17 @@ class Controller {
 		}
 	}
 
+	printMenuAndMenu() {
+		OutputView.printMenu(this.#orderList.getOrderList());
+		const price = this.#orderList.getTotalPrice().toLocaleString('ko-KR');
+		OutputView.printPrice(price);
+	}
+
 	async play() {
 		OutputView.printWelcome();
 		await this.settingDate();
 		await this.settingMenu();
-		OutputView.printMenu(this.#orderList.getOrderList());
-		OutputView.printPrice(this.#orderList.getTotalPrice());
+		this.printMenuAndMenu();
 	}
 }
 
