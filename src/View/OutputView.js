@@ -41,6 +41,9 @@ const OutputView = {
 	printEventBadge(badge) {
 		Console.print("<12월 이벤트 배지>");
 		Console.print(badge);
+	},
+	printError(message) {
+		Console.print(message);
 	}
 };
 

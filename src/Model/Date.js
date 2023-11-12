@@ -8,7 +8,7 @@ class Date {
 	}
 
 	#validateNumber(date) {
-		if(!Number(date)) throw new Error('[ERROR] 숫자를 입력해 주세요');
+		if(!Number(date)) throw new Error('[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.');
 		return Number(date);
 	}
 

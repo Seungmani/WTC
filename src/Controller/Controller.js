@@ -13,32 +13,34 @@ class Controller {
 		this.#orderList = [];
 	}
 
-	async setting() {
-		OutputView.printWelcome();
-		
+	async settingDate() {		
 		while(true) {
 			try {
 				const date = await InputView.readDate();
 				this.#date = new Date(date);
 				break;
-			} catch {
-				// print(error.message);
+			} catch (error) {
+				OutputView.printError(error.message);
 			}
 		}
+	}
 
+	async settingMenu() {
 		while(true) {
 			try {
 				const order = await InputView.readMenu();
 				this.#orderList = new Menu(order);
 				break;
-			} catch {
-				// print(error.message);
+			} catch (error) {
+				OutputView.printError(error.message);
 			}
 		}
 	}
 
 	async play() {
-		await this.setting();
+		OutputView.printWelcome();
+		await this.settingDate();
+		await this.settingMenu();
 		OutputView.printMenu(this.#orderList.getOrderList());
 		OutputView.printPrice(this.#orderList.getTotalPrice());
 	}
