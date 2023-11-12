@@ -47,6 +47,7 @@ class Controller {
 		OutputView.printWelcome();
 		await this.settingDate();
 		await this.settingMenu();
+		OutputView.printEvent(this.#date.getDate());
 		this.printMenuAndMenu();
 	}
 }
