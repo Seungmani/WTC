@@ -9,7 +9,7 @@ class Menu {
 
 	constructor(orderList) {
 		this.#orderList = this.#splitMenuAndCount(orderList);
-		this.#eachMenuCount = this.#countEachMenu(this.#orderList);
+		this.#eachMenuCount = this.#countEachMenu();
 		this.#totalMenuCount = this.#checkTotalCount();
 		this.#totalPrice = this.#checkTotalPrice();
 	}
@@ -53,16 +53,28 @@ class Menu {
 		if(allMenu.length === drink) throw new Error ('[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.')
 	}
 
+	// 메뉴 구하는 함수
+	#countMenu(menu) {
+		const count = Object.entries(this.#orderList).reduce((accumulator, currentValue) => {
+			if (menu.includes(currentValue[0])) {
+				this.#validateTrim(currentValue[1]);
+				const addValue = this.#validateNumber(currentValue[1]);
+				this.#validateZero(addValue);
+				return accumulator + addValue;
+			}
+			return accumulator;
+		}, 0);
+    return count;
+	}
+
 	// 메뉴 수 확인
-	#countEachMenu(orderList) {
-		const arrayForCheckMenu = Object.keys(orderList);
-		const mainMenuCount = arrayForCheckMenu.filter((menu) => Setting.MENU_MAIN.includes(menu)).length;
-		const dessertsCount = arrayForCheckMenu.filter((menu) => Setting.MENU_DESSERT.includes(menu)).length;
-		const drinksCount = arrayForCheckMenu.filter((menu) => Setting.MENU_DRINK.includes(menu)).length;
+	#countEachMenu() {
+		const appetizerCount = this.#countMenu(Setting.MENU_APPETIZER);
+		const mainMenuCount = this.#countMenu(Setting.MENU_MAIN);
+		const dessertsCount = this.#countMenu(Setting.MENU_DESSERT);
+		const drinksCount = this.#countMenu(Setting.MENU_DRINK);
 
-		this.#validateOnlyDrink(arrayForCheckMenu, drinksCount);
-
-		return [mainMenuCount, dessertsCount, drinksCount];
+		return [appetizerCount, mainMenuCount, dessertsCount, drinksCount];
 	}
 	
 	#validateTotalCount(totalCount) {
@@ -83,12 +95,8 @@ class Menu {
 	}
 
 	#checkTotalCount() {
-    const totalCount = Object.values(this.#orderList).reduce((accumulator, currentValue) => {
-			this.#validateTrim(currentValue)
-			const addValue = this.#validateNumber(currentValue);
-			this.#validateZero(addValue);
-			return accumulator + addValue
-		}, 0);
+    const totalCount = this.#eachMenuCount.reduce((accumulator, currentValue) => accumulator+currentValue, 0)
+    this.#validateOnlyDrink(totalCount, this.#eachMenuCount[3]);
 		this.#validateTotalCount(totalCount);
 		return totalCount;
 	}
