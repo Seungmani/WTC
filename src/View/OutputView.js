@@ -21,11 +21,7 @@ const OutputView = {
 	},
   printGiveawayMenu(given) {
 		Console.print("\n<증정 메뉴>");
-    if (given) {
-      Console.print("샴페인 1개");
-			return;
-    }
-		Console.print('없음');
+    given ? Console.print("샴페인 1개") : Console.print('없음');
   },
 	printBenefitDetails(christmasDiscount, weekdayDiscount, weekendDiscount, giveawayDiscount) {
 		Console.print("\n<혜택 내역>");
@@ -35,13 +31,13 @@ const OutputView = {
 			return;
 		}
 		Console.print(`크리스마스 디데이 할인: ${christmasDiscount}원`);
-		weekdayDiscount > 0 ? Console.print(`평일 할인: ${weekdayDiscount}원`) : 0;
-		weekendDiscount > 0 ? Console.print(`평일 할인: ${weekendDiscount}원`) : 0;
-		giveawayDiscount > 0 ? Console.print(`평일 할인: ${giveawayDiscount}원`) : 0;
+		weekdayDiscount > 0 ? Console.print(`평일 할인: -${weekdayDiscount}원`) : 0;
+		weekendDiscount > 0 ? Console.print(`평일 할인: -${weekendDiscount}원`) : 0;
+		giveawayDiscount > 0 ? Console.print(`평일 할인: -${giveawayDiscount}원`) : 0;
 	},
 	printTotalBenefitPrice(totalBenefitPrice) {
 		Console.print("\n<총혜택 금액>");
-		Console.print(`${totalBenefitPrice}원`);
+		totalBenefitPrice ? Console.print(`-${totalBenefitPrice}원`) : Console.print(`${totalBenefitPrice}원`);
 	},
 	printEventBadge(badge) {
 		Console.print("\n<12월 이벤트 배지>");
