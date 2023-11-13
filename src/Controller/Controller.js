@@ -52,6 +52,15 @@ class Controller {
 		await this.settingMenu();
 		OutputView.printEvent(this.#date.getDate());
 		this.printMenuAndMenu();
+
+		// 출력 순서
+		/*
+		<증정 메뉴>
+		<혜택 내역>
+		<총혜택 금액>
+		<할인 후 예상 결제 금액>
+		<12월 이벤트 배지>
+		 */
 	}
 }
 
