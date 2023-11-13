@@ -39,6 +39,10 @@ const OutputView = {
 		Console.print("\n<총혜택 금액>");
 		totalBenefitPrice ? Console.print(`-${totalBenefitPrice}원`) : Console.print(`${totalBenefitPrice}원`);
 	},
+	printAfterDiscountPrice(price) {
+		Console.print("\n<할인 후 예상 결제 금액>");
+		Console.print(`${price}원`)
+	},
 	printEventBadge(badge) {
 		Console.print("\n<12월 이벤트 배지>");
 		badge !== '' ? Console.print(badge) : Console.print('없음');

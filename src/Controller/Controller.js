@@ -20,7 +20,7 @@ class Controller {
 		while(true) {
 			try {
 				const date = await InputView.readDate();
-				this.#date = new Date(date);
+				this.#date = new Date(date).getDate();
 				break;
 			} catch (error) {
 				OutputView.printError(error.message);
@@ -50,17 +50,17 @@ class Controller {
 		OutputView.printWelcome();
 		await this.settingDate();
 		await this.settingMenu();
-		OutputView.printEvent(this.#date.getDate());
+		OutputView.printEvent(this.#date);
 		this.printMenuAndMenu();
 
-		// 출력 순서
-		/*
-		<증정 메뉴>
-		<혜택 내역>
-		<총혜택 금액>
-		<할인 후 예상 결제 금액>
-		<12월 이벤트 배지>
-		 */
+		this.#event = new Event(this.#date, this.#orderList.getEachMenuCount(), this.#orderList.getTotalPrice());
+		OutputView.printGiveawayMenu(this.#event.checkGiveaway()); // <증정 메뉴>
+
+		OutputView.printBenefitDetails(0,0,0,0); //<혜택 내역>
+		OutputView.printTotalBenefitPrice(0); // <총혜택 금액>
+		OutputView.printAfterDiscountPrice(0)//<할인 후 예상 결제 금액>
+		OutputView.printEventBadge(''); //<12월 이벤트 배지>
+
 	}
 }
 
