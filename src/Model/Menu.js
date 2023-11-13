@@ -49,22 +49,20 @@ class Menu {
     return returnOrderList;
 	}
 
-	#validateOnlyDrink() {
-		
+	#validateOnlyDrink(allMenu, drink=0) {
+		if(allMenu.length === drink) throw new Error ('[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.')
 	}
 
 	// 메뉴 수 확인
 	#countEachMenu(orderList) {
 		const arrayForCheckMenu = Object.keys(orderList);
-		const mainMenu = ['티본스테이크', '바비큐립', '해산물파스타', '크리스마스파스타'];
-		const desserts = ['초코케이크', '아이스크림'];
-		const drinks = ['제로콜라', '레드와인', '샴페인'];
+		const mainMenuCount = arrayForCheckMenu.filter((menu) => Setting.MENU_MAIN.includes(menu)).length;
+		const dessertsCount = arrayForCheckMenu.filter((menu) => Setting.MENU_DESSERT.includes(menu)).length;
+		const drinksCount = arrayForCheckMenu.filter((menu) => Setting.MENU_DRINK.includes(menu)).length;
 
-		return [
-			arrayForCheckMenu.filter((menu) => mainMenu.includes(menu)).length,
-			arrayForCheckMenu.filter((menu) => desserts.includes(menu)).length,
-			arrayForCheckMenu.filter((menu) => drinks.includes(menu)).length,
-		];
+		this.#validateOnlyDrink(arrayForCheckMenu, drinksCount);
+
+		return [mainMenuCount, dessertsCount, drinksCount];
 	}
 	
 	#validateTotalCount(totalCount) {
@@ -112,6 +110,10 @@ class Menu {
 
 	getTotalPrice() {
 		return this.#totalPrice;
+	}
+
+	getEachMenuCount() {
+		return this.#eachMenuCount;
 	}
 
 }
