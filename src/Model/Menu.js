@@ -5,9 +5,11 @@ class Menu {
 	#orderList;
 	#totalMenuCount;
 	#totalPrice;
+	#eachMenuCount;
 
 	constructor(orderList) {
 		this.#orderList = this.#splitMenuAndCount(orderList);
+		this.#eachMenuCount = this.#countEachMenu(this.#orderList);
 		this.#totalMenuCount = this.#checkTotalCount();
 		this.#totalPrice = this.#checkTotalPrice();
 	}
@@ -45,6 +47,24 @@ class Menu {
       returnOrderList[splitMenu[0]] = splitMenu[1];
 		});
     return returnOrderList;
+	}
+
+	#validateOnlyDrink() {
+		
+	}
+
+	// 메뉴 수 확인
+	#countEachMenu(orderList) {
+		const arrayForCheckMenu = Object.keys(orderList);
+		const mainMenu = ['티본스테이크', '바비큐립', '해산물파스타', '크리스마스파스타'];
+		const desserts = ['초코케이크', '아이스크림'];
+		const drinks = ['제로콜라', '레드와인', '샴페인'];
+
+		return [
+			arrayForCheckMenu.filter((menu) => mainMenu.includes(menu)).length,
+			arrayForCheckMenu.filter((menu) => desserts.includes(menu)).length,
+			arrayForCheckMenu.filter((menu) => drinks.includes(menu)).length,
+		];
 	}
 	
 	#validateTotalCount(totalCount) {

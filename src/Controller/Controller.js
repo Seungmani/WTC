@@ -2,15 +2,18 @@ import OutputView from "../View/OutputView";
 import InputView from "../View/InputView";
 import Date from "../Model/Date";
 import Menu from "../Model/Menu";
+import Event from "../Model/Event";
 
 class Controller {
 
 	#date;
 	#orderList;
+	#event;
 
 	constructor() {
-		this.#date = 0;
-		this.#orderList = [];
+		this.#date;
+		this.#orderList;
+		this.#event;
 	}
 
 	async settingDate() {		
