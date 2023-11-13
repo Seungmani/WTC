@@ -16,7 +16,7 @@ class Controller {
 		this.#event;
 	}
 
-	async settingDate() {		
+	async #settingDate() {		
 		while(true) {
 			try {
 				const date = await InputView.readDate();
@@ -28,7 +28,7 @@ class Controller {
 		}
 	}
 
-	async settingMenu() {
+	async #settingMenu() {
 		while(true) {
 			try {
 				const order = await InputView.readMenu();
@@ -40,27 +40,31 @@ class Controller {
 		}
 	}
 
-	printMenuAndMenu() {
+	#printMenuAndMenu() {
 		OutputView.printMenu(this.#orderList.getOrderList());
 		const price = this.#orderList.getTotalPrice().toLocaleString('ko-KR');
 		OutputView.printPrice(price);
 	}
 
-	async play() {
-		OutputView.printWelcome();
-		await this.settingDate();
-		await this.settingMenu();
-		OutputView.printEvent(this.#date);
-		this.printMenuAndMenu();
-
-		this.#event = new Event(this.#date, this.#orderList.getEachMenuCount(), this.#orderList.getTotalPrice());
+	#printAllEvent() {
 		OutputView.printGiveawayMenu(this.#event.checkGiveaway()); // <증정 메뉴>
 
-		OutputView.printBenefitDetails(0,0,0,0); //<혜택 내역>
+		OutputView.printBenefitDetails(x,0,0,0); //<혜택 내역>
 		OutputView.printTotalBenefitPrice(0); // <총혜택 금액>
 		OutputView.printAfterDiscountPrice(0)//<할인 후 예상 결제 금액>
 		OutputView.printEventBadge(''); //<12월 이벤트 배지>
+	}
 
+	async play() {
+		OutputView.printWelcome();
+		await this.#settingDate();
+		await this.#settingMenu();
+		OutputView.printEvent(this.#date);
+
+		this.#printMenuAndMenu();
+
+		this.#event = new Event(this.#date, this.#orderList.getEachMenuCount(), this.#orderList.getTotalPrice());
+		this.#printAllEvent();
 	}
 }
 
