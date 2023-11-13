@@ -1,3 +1,5 @@
+import Setting from "../Constants/Setting";
+
 class Date {
 	#date;
 
@@ -13,7 +15,7 @@ class Date {
 	}
 
 	#validateRange(date) {
-		if (1 > date || date > 31) {
+		if (Setting.FIRST_DAY > date || date > Setting.LAST_DAY) {
 			throw new Error('[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.');
 		}
 	}

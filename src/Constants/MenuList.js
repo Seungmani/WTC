@@ -1,4 +1,4 @@
-const MenuList = {
+const MenuList = Object.freeze({
 	'양송이수프': 6000,
 	'타파스': 5500,
 	'시저샐러드': 8000,
@@ -11,6 +11,6 @@ const MenuList = {
 	'제로콜라': 3000,
 	'레드와인': 6000,
 	'샴페인': 25000,
-}
+});
 
 export default MenuList;

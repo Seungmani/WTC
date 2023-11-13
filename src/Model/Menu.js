@@ -1,4 +1,5 @@
 import MenuList from "../Constants/MenuList";
+import Setting from "../Constants/Setting";
 
 class Menu {
 	#orderList;
@@ -13,7 +14,7 @@ class Menu {
 
 	// 입력 받은 메뉴가 없으면 에러
 	#validateNotOrder(order) {
-		if (order[0] === '') throw new Error('[ERROR] 메뉴를 입력해 주세요');
+		if (order[0] === Setting.NOT_INPUT_MENU) throw new Error('[ERROR] 메뉴를 입력해 주세요');
 	}
 
 	// 메뉴가 없는 종류면 에러
@@ -29,7 +30,7 @@ class Menu {
 
 	// 메뉴 형식 확인
 	#validateOrderForm(order) {
-		if (order.length !==2) throw new Error('[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.');
+		if (order.length !== Setting.NORMAL_SPLIT_LENGTH) throw new Error('[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.');
 	}
 
 	// [해산물파스타-2] => { '해산물파스타': '2' }
@@ -37,7 +38,7 @@ class Menu {
 		const returnOrderList = {}
 		this.#validateNotOrder(orderList);
 		orderList.forEach(order => {
-			const splitMenu = order.split('-');
+			const splitMenu = order.split(Setting.DELIMITER_HYPHEN);
 			this.#validateOrderForm(splitMenu);
 			this.#validateIsMenu(splitMenu[0]);
 			this.#validateDuplicate(returnOrderList, splitMenu[0]);
