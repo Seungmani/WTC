@@ -22,4 +22,14 @@ const Setting = Object.freeze({
 	MENU_DRINK: ['제로콜라', '레드와인', '샴페인'],
 });
 
+function deepFreeze(target) {
+  if (target && typeof target === 'object' && !Object.isFrozen(target)) {
+    Object.freeze(target);
+    Object.keys(target).map((item) => deepFreeze(target[item]));
+  }
+  return target;
+}
+
+deepFreeze(Setting);
+
 export default Setting;

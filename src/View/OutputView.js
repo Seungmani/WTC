@@ -25,7 +25,6 @@ const OutputView = {
   },
 	printBenefitDetails(dateDiscount, weekdayDiscount, weekendDiscount, starDiscount, giveawayDiscount) {
 		Console.print("\n<혜택 내역>");
-		console.log(dateDiscount, weekdayDiscount, weekendDiscount, starDiscount, giveawayDiscount);
 
 		if (dateDiscount === 0 && weekdayDiscount === 0 && weekendDiscount === 0 && giveawayDiscount === 0) {
 			Console.print('없음');
