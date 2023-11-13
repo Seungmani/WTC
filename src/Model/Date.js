@@ -4,6 +4,7 @@ class Date {
 	#date;
 
 	constructor(date) {
+		this.#validateTrim(date);
 		const inputDate = this.#validateNumber(date);
 		this.#validateRange(inputDate);
 		this.#date = inputDate;
@@ -12,6 +13,10 @@ class Date {
 	#validateNumber(date) {
 		if(!Number(date)) throw new Error('[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.');
 		return Number(date);
+	}
+
+	#validateTrim(date) {
+		if(date.length !== date.trim().length) throw new Error('[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.');
 	}
 
 	#validateRange(date) {

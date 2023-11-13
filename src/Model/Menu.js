@@ -51,6 +51,10 @@ class Menu {
 		if (totalCount > 20) throw new Error('[ERROR] 총 메뉴 주문 수는 20개를 초과할 수 없습니다. 다시 입력해 주세요.');
 	}
 
+	#validateTrim(date) {
+		if(date.length !== date.trim().length) throw new Error('[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.');
+	}
+
 	#validateNumber(count) {
 		if (Number(count) !==0 && !Number(count)) throw new Error('[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.');
 		return Number(count);
@@ -62,6 +66,7 @@ class Menu {
 
 	#checkTotalCount() {
     const totalCount = Object.values(this.#orderList).reduce((accumulator, currentValue) => {
+			this.#validateTrim(currentValue)
 			const addValue = this.#validateNumber(currentValue);
 			this.#validateZero(addValue);
 			return accumulator + addValue
