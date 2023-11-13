@@ -17,7 +17,7 @@ const OutputView = {
   },
 	printPrice(price) {
 		Console.print("\n<할인 전 총주문 금액>");
-		Console.print(`${price}원`)
+		Console.print(`${price.toLocaleString('ko-KR')}원`)
 	},
   printGiveawayMenu(given) {
 		Console.print("\n<증정 메뉴>");
@@ -25,24 +25,25 @@ const OutputView = {
   },
 	printBenefitDetails(dateDiscount, weekdayDiscount, weekendDiscount, starDiscount, giveawayDiscount) {
 		Console.print("\n<혜택 내역>");
+		console.log(dateDiscount, weekdayDiscount, weekendDiscount, starDiscount, giveawayDiscount);
 
 		if (dateDiscount === 0 && weekdayDiscount === 0 && weekendDiscount === 0 && giveawayDiscount === 0) {
 			Console.print('없음');
 			return;
 		}
-		dateDiscount > 0 ? Console.print(`크리스마스 디데이 할인: -${dateDiscount}원`) :0;
-		weekdayDiscount > 0 ? Console.print(`평일 할인: -${weekdayDiscount}원`) : 0;
-		weekendDiscount > 0 ? Console.print(`주말 할인: -${weekendDiscount}원`) : 0;
-		starDiscount > 0 ? Console.print(`특별 할인: -${starDiscount}원`) : 0;
-		giveawayDiscount > 0 ? Console.print(`증정 이벤트: -${giveawayDiscount}원`) : 0;
+		dateDiscount > 0 ? Console.print(`크리스마스 디데이 할인: -${dateDiscount.toLocaleString('ko-KR')}원`) :0;
+		weekdayDiscount > 0 ? Console.print(`평일 할인: -${weekdayDiscount.toLocaleString('ko-KR')}원`) : 0;
+		weekendDiscount > 0 ? Console.print(`주말 할인: -${weekendDiscount.toLocaleString('ko-KR')}원`) : 0;
+		starDiscount > 0 ? Console.print(`특별 할인: -${starDiscount.toLocaleString('ko-KR')}원`) : 0;
+		giveawayDiscount > 0 ? Console.print(`증정 이벤트: -${giveawayDiscount.toLocaleString('ko-KR')}원`) : 0;
 	},
 	printTotalBenefitPrice(totalBenefitPrice) {
 		Console.print("\n<총혜택 금액>");
-		totalBenefitPrice ? Console.print(`-${totalBenefitPrice}원`) : Console.print(`${totalBenefitPrice}원`);
+		totalBenefitPrice ? Console.print(`-${totalBenefitPrice.toLocaleString('ko-KR')}원`) : Console.print(`${totalBenefitPrice.toLocaleString('ko-KR')}원`);
 	},
 	printAfterDiscountPrice(price) {
 		Console.print("\n<할인 후 예상 결제 금액>");
-		Console.print(`${price}원`)
+		Console.print(`${price.toLocaleString('ko-KR')}원`)
 	},
 	printEventBadge(badge) {
 		Console.print("\n<12월 이벤트 배지>");
