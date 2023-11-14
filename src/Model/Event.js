@@ -51,7 +51,7 @@ class Event {
 		}
 	}
 
-		// 평일 할인-디저트 수*2023, 주말 할인-각 메인 수* 2023, 없으면 없음
+	// 평일 할인-디저트 수*2023, 주말 할인-각 메인 수* 2023, 없으면 없음
 	#checkWeekendDiscount() {
 		if (Setting.WEEKEND.includes(this.#date)) {
 			this.#promotionDiscountPrice.weekendDiscount = this.#menuCount[1] * Setting.WEEKEND_DAY_DISCOUNT_PRICE;
