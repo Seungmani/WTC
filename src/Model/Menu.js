@@ -24,9 +24,7 @@ class Menu {
 			Validate.validateIsMenu(splitMenu[0]);
 			Validate.validateDuplicate(returnOrderList, splitMenu[0]);
       returnOrderList[splitMenu[0]] = splitMenu[1];
-			console.log("RERER", returnOrderList);
 		});
-		console.log(" 최종", returnOrderList);
     return returnOrderList;
 	}
 
