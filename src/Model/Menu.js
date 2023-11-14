@@ -22,7 +22,6 @@ class Menu {
 		orderList.forEach(order => {
 			Validate.validateOrderFormSplitRest(order);
 			const splitMenu = order.split(Setting.DELIMITER_HYPHEN);
-			Validate.validateOrderFormSplitHyphen(splitMenu);
 			Validate.validateIsMenu(splitMenu[0]);
 			Validate.validateDuplicate(returnOrderList, splitMenu[0]);
       returnOrderList[splitMenu[0]] = splitMenu[1];
@@ -33,9 +32,7 @@ class Menu {
 	#countMenu(menu) {
 		const count = Object.entries(this.#orderList).reduce((accumulator, currentValue) => {
 			if (menu.includes(currentValue[0])) {
-				Validate.validateOderCountTrim(currentValue[1]);
-				const addValue = Validate.validateNumberBiggerZero(currentValue[1]);
-				Validate.validateZero(addValue);
+				const addValue = Validate.validateZero(currentValue[1]);
 				return accumulator + addValue;
 			}
 			return accumulator;
