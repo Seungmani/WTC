@@ -1,28 +1,13 @@
-import Setting from "../Constants/Setting";
+import Validate from "../Constants/Validate";
 
 class Date {
 	#date;
 
 	constructor(date) {
-		this.#validateTrim(date);
-		const inputDate = this.#validateNumber(date);
-		this.#validateRange(inputDate);
+		Validate.validateDateTrim(date);
+		const inputDate = Validate.validateDateNumber(date);
+		Validate.validateDateRange(inputDate);
 		this.#date = inputDate;
-	}
-
-	#validateNumber(date) {
-		if(!Number(date)) throw new Error('[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.');
-		return Number(date);
-	}
-
-	#validateTrim(date) {
-		if(date.length !== date.trim().length) throw new Error('[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.');
-	}
-
-	#validateRange(date) {
-		if (Setting.FIRST_DAY > date || date > Setting.LAST_DAY) {
-			throw new Error('[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.');
-		}
 	}
 
 	getDate() {
