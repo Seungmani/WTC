@@ -12,9 +12,7 @@ const Validate = {
 	},
 
 	validateDateRange(date) {
-		if (Setting.FIRST_DAY > date || date > Setting.LAST_DAY) {
-			throw new Error('[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.');
-		}
+		if (Setting.FIRST_DAY > date || date > Setting.LAST_DAY) throw new Error('[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.');
 	},
 
 	validateNotOrder(order) {
@@ -47,6 +45,6 @@ const Validate = {
 		if (Number(count) === 0) throw new Error('[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.');
 		return Number(count);
 	}
-}
+};
 
 export default Validate;

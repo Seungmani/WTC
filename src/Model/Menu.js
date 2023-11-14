@@ -15,7 +15,6 @@ class Menu {
 		this.#totalPrice = this.#checkTotalPrice();
 	}
 
-
 	#splitMenuAndCount(orderList) {
 		const returnOrderList = {}
 		Validate.validateNotOrder(orderList);
@@ -26,6 +25,7 @@ class Menu {
 			Validate.validateDuplicate(returnOrderList, splitMenu[0]);
       returnOrderList[splitMenu[0]] = splitMenu[1];
 		});
+
     return returnOrderList;
 	}
 
@@ -53,6 +53,7 @@ class Menu {
     const totalCount = this.#eachMenuCount.reduce((accumulator, currentValue) => accumulator+currentValue, 0)
     Validate.validateOnlyDrink(totalCount, this.#eachMenuCount[3]);
 		Validate.validateTotalCount(totalCount);
+
 		return totalCount;
 	}
 

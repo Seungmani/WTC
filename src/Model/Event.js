@@ -55,15 +55,12 @@ class Event {
 
 	// 평일 할인-디저트 수*2023, 주말 할인-각 메인 수* 2023, 없으면 없음
 	#checkWeekendDiscount() {
-		console.log("menuCount",this.#menuCount);
 		if (this.#totalPrice < Setting.LIMIT_PRICE) return 0;
 		if (Setting.WEEKEND.includes(this.#date)) {
-			console.log("주말", this.#menuCount[1] * Setting.WEEKEND_DAY_DISCOUNT_PRICE);
 			this.#promotionDiscountPrice.weekendDiscount = this.#menuCount[1] * Setting.WEEKEND_DAY_DISCOUNT_PRICE;
 			this.#addDiscountPrice(this.#promotionDiscountPrice.weekendDiscount);
 			return;
 		}
-		console.log("평일", this.#menuCount[2] * Setting.WEEKEND_DAY_DISCOUNT_PRICE);
 		this.#promotionDiscountPrice.weekdayDiscount = this.#menuCount[2] * Setting.WEEKEND_DAY_DISCOUNT_PRICE;
 		this.#addDiscountPrice(this.#promotionDiscountPrice.weekdayDiscount);
 	}
@@ -101,9 +98,11 @@ class Event {
 	}
 
 	getCalculatedAmount() {
-		return this.#promotionDiscountPrice.giveawayDiscount !== 0 
+		const calculatedAmount = this.#promotionDiscountPrice.giveawayDiscount !== 0 
 		? this.#totalPrice - this.#totalDiscountPrice + this.#promotionDiscountPrice.giveawayDiscount 
 		: this.#totalPrice - this.#totalDiscountPrice;
+		
+		return calculatedAmount;
 	}
 
 }
