@@ -36,7 +36,8 @@ const Validate = {
 	},
 
 	validateOnlyDrink(allMenu, drink=0) {
-		if(allMenu.length === drink) throw new Error ('[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.')
+		console.log("validateOnlyDrink", allMenu, drink)
+		if(allMenu.length === drink) throw new Error ('[ERROR] 음료 유효하지 않은 주문입니다. 다시 입력해 주세요.')
 	},
 
 	validateTotalCount(totalCount) {
@@ -44,7 +45,7 @@ const Validate = {
 	},
 	
 	validateZero(count) {
-		if (Number(count) === 0) throw new Error('[ERROR] 0 유효하지 않은 주문입니다. 다시 입력해 주세요.');
+		if (Number(count) === 0) throw new Error('[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.');
 		return Number(count);
 	}
 }

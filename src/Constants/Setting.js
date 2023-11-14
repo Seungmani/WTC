@@ -20,6 +20,7 @@ const Setting = Object.freeze({
 	MENU_MAIN: ['티본스테이크', '바비큐립', '해산물파스타', '크리스마스파스타'],
 	MENU_DESSERT: ['초코케이크', '아이스크림'],
 	MENU_DRINK: ['제로콜라', '레드와인', '샴페인'],
+	LIMIT_PRICE: 10000,
 });
 
 function deepFreeze(target) {

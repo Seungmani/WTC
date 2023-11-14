@@ -34,6 +34,7 @@ class Event {
 
 	// 증정 이벤트 12만원 이상, 없으면 없음
 	checkGiveaway() {
+		if (this.#totalPrice > Setting.LIMIT_PRICE) return false;
 		if (this.#totalPrice > Setting.GIVEAWAY_STANDARD_PRICE) {
 			this.#promotionDiscountPrice.giveawayDiscount = Setting.GIVEAWAY_PRICE;
 			this.#addDiscountPrice(Setting.GIVEAWAY_PRICE);
@@ -45,6 +46,7 @@ class Event {
 
 	// 날짜를 받으면 이벤트 기간(1~25)에 맞는 할인 금액 출력, 없으면 없음
 	#checkDateDiscount() {
+		if (this.#totalPrice > Setting.LIMIT_PRICE) return 0;
 		if (Setting.FIRST_DAY <= this.#date && this.#date <= Setting.CHRISTMAS) {
 			this.#promotionDiscountPrice.dateDiscount = Setting.FIRST_DAY_DISCOUNT_PRICE + Setting.ADD_DAY_DISCOUNT_PRICE * (this.#date-Setting.FIRST_DAY);
 			this.#addDiscountPrice(this.#promotionDiscountPrice.dateDiscount);
@@ -53,6 +55,7 @@ class Event {
 
 	// 평일 할인-디저트 수*2023, 주말 할인-각 메인 수* 2023, 없으면 없음
 	#checkWeekendDiscount() {
+		if (this.#totalPrice > Setting.LIMIT_PRICE) return 0;
 		if (Setting.WEEKEND.includes(this.#date)) {
 			this.#promotionDiscountPrice.weekendDiscount = this.#menuCount[1] * Setting.WEEKEND_DAY_DISCOUNT_PRICE;
 			this.#addDiscountPrice(this.#promotionDiscountPrice.weekendDiscount);
@@ -64,6 +67,7 @@ class Event {
 
 	// 특별 할인, 총 금액에서 1000원 할인, 없으면 없음
 	#checkStarDiscount() {
+		if (this.#totalPrice > Setting.LIMIT_PRICE) return 0;
 		if (Setting.STAR_DISCOUNT_DAY.includes(this.#date)) {
 			this.#promotionDiscountPrice.starDiscount = Setting.STAR_DAY_DISCOUNT;
 			this.#addDiscountPrice(Setting.STAR_DAY_DISCOUNT);
@@ -72,6 +76,7 @@ class Event {
 
 	// 배지 확인 5000 -> 별, 10000 -> 트리, 20000 -> 산타, 없으면 없음
 	checkBadge() {
+		if (this.#totalPrice > Setting.LIMIT_PRICE) return '';
 		if (this.#totalDiscountPrice >= Setting.BADGE_PRICE[2]) {
 			return Setting.BADGE[2];
 		}

@@ -56,6 +56,16 @@ class Controller {
 		OutputView.printEventBadge(this.#event.checkBadge());
 	}
 
+	#printNoEvent() {
+		OutputView.printGiveawayMenu(this.#event.checkGiveaway());
+		this.#event.checkAllDiscount()
+		const {dateDiscount, weekdayDiscount, weekendDiscount, starDiscount, giveawayDiscount} = this.#event.getPromotionDiscountPrice();
+		OutputView.printBenefitDetails(dateDiscount, weekdayDiscount, weekendDiscount, starDiscount, giveawayDiscount); //<혜택 내역>
+		OutputView.printTotalBenefitPrice(this.#event.getTotalDiscountPrice());
+		OutputView.printAfterDiscountPrice(0)
+		OutputView.printEventBadge(this.#event.checkBadge());
+	}
+
 	async play() {
 		OutputView.printWelcome();
 		await this.#settingDate();
