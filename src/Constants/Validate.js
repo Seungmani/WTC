@@ -30,8 +30,13 @@ const Validate = {
 		if (arrayForCheckDuplicate.includes(order)) throw new Error('[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.')
 	},
 
-	validateOrderForm(order) {
-		if (order.length !== Setting.NORMAL_SPLIT_LENGTH) throw new Error('[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.');
+	validateOrderFormSplitRest(order) {
+		const regForm = /^[ㄱ-ㅎ가-힣]+-\d{1,2}$/;
+		if (!regForm.test(order)) throw new Error('[ERROR] 메뉴-개수 유효하지 않은 주문입니다. 다시 입력해 주세요.');
+	},
+
+	validateOrderFormSplitHyphen(order) {
+		if (order.length !== Setting.NORMAL_SPLIT_LENGTH) throw new Error('[ERROR] 하이픈 유효하지 않은 주문입니다. 다시 입력해 주세요.');
 	},
 
 	validateOnlyDrink(allMenu, drink=0) {

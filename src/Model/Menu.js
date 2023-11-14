@@ -15,12 +15,14 @@ class Menu {
 		this.#totalPrice = this.#checkTotalPrice();
 	}
 
+
 	#splitMenuAndCount(orderList) {
 		const returnOrderList = {}
 		Validate.validateNotOrder(orderList);
 		orderList.forEach(order => {
+			Validate.validateOrderFormSplitRest(order);
 			const splitMenu = order.split(Setting.DELIMITER_HYPHEN);
-			Validate.validateOrderForm(splitMenu);
+			Validate.validateOrderFormSplitHyphen(splitMenu);
 			Validate.validateIsMenu(splitMenu[0]);
 			Validate.validateDuplicate(returnOrderList, splitMenu[0]);
       returnOrderList[splitMenu[0]] = splitMenu[1];
