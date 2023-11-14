@@ -27,7 +27,7 @@ const Validate = {
 
 	validateDuplicate(orderList, order) {
 		const arrayForCheckDuplicate = Object.keys(orderList);
-		if (arrayForCheckDuplicate.includes(order)) throw new Error('[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.')
+		if (arrayForCheckDuplicate.includes(order)) throw new Error('[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.');
 	},
 
 	validateOrderFormSplitRest(order) {
@@ -36,8 +36,7 @@ const Validate = {
 	},
 
 	validateOnlyDrink(allMenu, drink=0) {
-		console.log("validateOnlyDrink", allMenu, drink)
-		if(allMenu.length === drink) throw new Error ('[ERROR] 음료 유효하지 않은 주문입니다. 다시 입력해 주세요.')
+		if(allMenu === drink) throw new Error ('[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.');
 	},
 
 	validateTotalCount(totalCount) {
