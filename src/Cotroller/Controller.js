@@ -7,6 +7,8 @@ class Controller {
 
 	#month;
 	#startDay;
+	#weekDayWorker;
+	#dayOffWorker;
 
 	constructor() {
 	}
@@ -14,18 +16,21 @@ class Controller {
 	#validateMonthAnsStartDayIInputForm(input) {
 		const reg = /^\d{1,2},{1}[ㄱ-ㅎ|가-힣]{1}$/; // 숫자 1~2자리 + ',' 한 자리 + 문자 한자리 검증
 		if (!reg.test(input)) {
-			throw new Error("[ERROR] 숫자 , 한글 형태로 입력해주세요. 디시 입력");
+			throw new Error("[ERROR] 숫자 , 한글 형태로 입력해주세요. 다시 입력");
 		}
 	}
 
-	#inputMonthAndStartDay() {
+	async #inputMonthAndStartDay() {
 		while(true) {
 			try {
-				const inputMonthAndStartDay = InputViews.readMontAndStartDay();
+				const inputMonthAndStartDay = await InputViews.readMontAndStartDay();
+				console.log(inputMonthAndStartDay);
 				this.#validateMonthAnsStartDayIInputForm(inputMonthAndStartDay);
-				this.#setMonthAndStartDay(inputMonthAndStartDay);
+				const [month, startDay] = inputMonthAndStartDay.split(",");
+				this.#month = new Month(month);
+				this.#startDay = new Days(month, startDay);
 				break;
-			} catch(error) {
+			} catch (error) {
 				OutputViews.printError(error.message);
 			}
 		}
@@ -37,7 +42,22 @@ class Controller {
 		this.#startDay = new Days(startDay);
 	}
 
+	async#WeekDayWorker() {
+		while(true) {
+			try {
+				const inputWorker = await InputViews.readWeekDayWorker();
+
+				break;
+			} catch(error) {
+				OutputViews.printError(error.message);
+			}
+		}
+	}
+
+	async#DayOffWorker() {}
+
 	async start() {
+		await this.#inputMonthAndStartDay();
 
 	}
 }
