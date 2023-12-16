@@ -5,6 +5,7 @@ class Month {
 
 	constructor(month) {
 		this.#validateMonthRange(month);
+		this.#month = month;
 	}
 	
 	// 1~12월 사이인지

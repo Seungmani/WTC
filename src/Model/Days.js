@@ -6,6 +6,7 @@ class Days {
 	#dayOfTheWeek = {};
 	#holiday = [];
 	#weekTonumber;
+	#statutoryHoliday = [];
 
 	constructor(month, startDay) {
 		this.#validateNormalDays(startDay);
@@ -27,7 +28,7 @@ class Days {
 	#setStatutoryHoliday(month) {
 		const containHolidayMonth = Object.keys(Static.STATUTORY_HOLIDAYS)
 		if (containHolidayMonth.includes(month)) {
-			this.#holiday.push(Static.STATUTORY_HOLIDAYS[month]);
+			this.#statutoryHoliday.push(Static.STATUTORY_HOLIDAYS[month]);
 		}
 	}
 
@@ -51,21 +52,21 @@ class Days {
 		const weekTonumber = {}
     let dayIndex = days.indexOf(startDay);
 
-		for(let i=1; i<=7; i++) {
-			const x = i%7;
-			weekTonumber[x] = days[dayIndex];
+		Static.DAYS.map((day, index) => {
+			const week = index%7;
+			weekTonumber[week] = days[dayIndex];
 			dayIndex++;
-		}
+		});
 		return weekTonumber;
 	}
 
 	// 1-월 과 같이 요일 설정
 	#setDayOfTheWeek(lastDay) {
-		let index = 1;
+		let index = 0;
 		while(index <= lastDay) {
       Object.entries(this.#weekTonumber).filter((v) => {
         if(v[0] === String(index%7)) {
-					this.#dayOfTheWeek[index] = v[1];
+					this.#dayOfTheWeek[index+1] = v[1];
         } 
       });
 			index++;
@@ -78,6 +79,14 @@ class Days {
 
 	getDayOfTheWeek() {
 		return this.#dayOfTheWeek;
+	}
+
+	getLastDay() {
+		return this.#lastDay;
+	}
+
+	getStatutoryHoliday() {
+		return this.#statutoryHoliday;
 	}
 }
 
