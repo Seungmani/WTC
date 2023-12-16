@@ -2,6 +2,7 @@ import InputViews from "../VIews/InputViews";
 import OutputViews from "../VIews/OutputViews";
 import Days from "../Model/Days";
 import Month from "../Model/Month";
+import Worker from "../Model/Worker";
 
 class Controller {
 
@@ -26,9 +27,7 @@ class Controller {
 				const inputMonthAndStartDay = await InputViews.readMontAndStartDay();
 				console.log(inputMonthAndStartDay);
 				this.#validateMonthAnsStartDayIInputForm(inputMonthAndStartDay);
-				const [month, startDay] = inputMonthAndStartDay.split(",");
-				this.#month = new Month(month);
-				this.#startDay = new Days(month, startDay);
+				this.#setMonthAndStartDay(inputMonthAndStartDay);
 				break;
 			} catch (error) {
 				OutputViews.printError(error.message);
@@ -39,14 +38,14 @@ class Controller {
 	#setMonthAndStartDay(inputMonthAndStartDay) {
 		const [month, startDay] = inputMonthAndStartDay.split(",");
 		this.#month = new Month(month);
-		this.#startDay = new Days(startDay);
+		this.#startDay = new Days(month, startDay);
 	}
 
 	async#WeekDayWorker() {
 		while(true) {
 			try {
 				const inputWorker = await InputViews.readWeekDayWorker();
-
+				this.#weekDayWorker = new Worker().setDayWorker(inputWorker);
 				break;
 			} catch(error) {
 				OutputViews.printError(error.message);

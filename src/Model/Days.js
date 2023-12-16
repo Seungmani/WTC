@@ -4,7 +4,7 @@ class Days {
 
 	#lastDay;
 	#dayOfTheWeek = {};
-	#statutoryHoliday;
+	#holiday = [];
 	#weekTonumber;
 
 	constructor(month, startDay) {
@@ -12,7 +12,8 @@ class Days {
 		this.#setStatutoryHoliday(month);
 		this.#lastDay = this.#setLastDay(month);
 		this.#weekTonumber = this.#setWeekToNumber(startDay)
-		this.#setDayOfTheWeek(this.#lastDay);;
+		this.#setDayOfTheWeek(this.#lastDay);
+		this.#setHoliday();
 	}
 
 	// 요일이 정상인가?
@@ -26,8 +27,17 @@ class Days {
 	#setStatutoryHoliday(month) {
 		const containHolidayMonth = Object.keys(Static.STATUTORY_HOLIDAYS)
 		if (containHolidayMonth.includes(month)) {
-			this.#statutoryHoliday = Static.STATUTORY_HOLIDAYS.month
+			this.#holiday.push(Static.STATUTORY_HOLIDAYS[month]);
 		}
+	}
+
+	#setHoliday() {
+		Object.entries(this.#dayOfTheWeek).map((day) => {
+			const dayString = day[1]
+			if (dayString=== "토" || dayString === "일") {
+				this.#holiday.push(Number(day[0]));
+			}
+		});
 	}
 
 	// 마지막 날 정함
@@ -55,15 +65,15 @@ class Days {
 		while(index <= lastDay) {
       Object.entries(this.#weekTonumber).filter((v) => {
         if(v[0] === String(index%7)) {
-					this.#dayOfTheWeek[index]= v[1];
+					this.#dayOfTheWeek[index] = v[1];
         } 
       });
 			index++;
 		}
 	}
 
-	getStatutoryHoliday() {
-		return this.#statutoryHoliday;
+	getHoliday() {
+		return this.#holiday;
 	}
 
 	getDayOfTheWeek() {
