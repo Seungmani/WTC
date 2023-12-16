@@ -96,7 +96,6 @@ class Controller {
 		}
 	}
 
-
 	#setDayOffSchedule(allDayOfWeek,holiday, dayOffWorker, dayOffIndex) {
 		const holiDaySchedule = [];
 		Object.entries(allDayOfWeek).map((value) => {
